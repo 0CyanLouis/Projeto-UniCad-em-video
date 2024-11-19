@@ -1,7 +1,14 @@
+/*
+stdio.h: Para entrada/saída padrão (como printf).
+stdlib.h: Para funções como alocação de memória e conversões.
+string.h: Para manipulação de strings.
+mysql.h: Para interagir com o banco de dados MySQL.
+locale.h: Para configurar a localização, como suporte a caracteres acentuados.  
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <mysql.h> // Use o caminho padrão para evitar problemas de plataforma
+#include <mysql.h>
 #include <locale.h>
 
 // Função para decodificar caracteres especiais de URL (como %40 para @)
@@ -147,4 +154,6 @@ int main(void)
 
     free(data);
     return 0;
+    perror("Error Message");
+
 }

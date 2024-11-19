@@ -1,7 +1,7 @@
 
 .form {
     max-width: 320px;
-    width: 90%;
+    width: 30%;
     background-color: #1e2833;
     padding: 30px;
     border-radius: 4px;
@@ -26,5 +26,6 @@
   box-shadow: none;
   text-shadow: none;
   outline: none;  
+  margin-top: 500px;
   
 }
