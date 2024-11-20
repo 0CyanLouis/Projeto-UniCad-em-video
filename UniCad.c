@@ -34,7 +34,7 @@ setlocale(LC_ALL, "Portuguese_Brazil.1252");
 }
 
 void delete() {
-    FILE *file = fopen("aluno.csv", "r"), *temp = fopen("aluno.csv", "w");
+    FILE *file = fopen("aluno.csv", "r"), *temp = fopen("temp.csv", "w");
     char line[150], target[50];    
     if (!file || !temp) { 
         printf("Erro ao abrir arquivo!\n");
@@ -43,22 +43,22 @@ void delete() {
 
     printf("1 - Remover todos os registros \n2 - Remover apenas um registro\n");
     scanf("%s", target);
-    if(target == 1){
-            while (fgets(line, sizeof(line), file))
-            if (!strstr(line, target))
-            fputs(line, temp);
+    if(atoi(target) == 1) {
+        while (fgets(line, sizeof(line), file)) {
+            fputs(line, temp);  // Copiando linhas (você pode ajustar se necessário)
+        }
 
-            fclose(file);
-            fclose(temp);
-            remove("aluno.csv");
-            rename("temp.csv", "aluno.csv");
-            printf("Todos os registros removidos!\n");
+        fclose(file);
+        fclose(temp);
+        remove("aluno.csv");
+        rename("temp.csv", "aluno.csv");
+        printf("Todos os registros removidos!\n");
+    } else {
+        printf("Em programação...");
+        system("pause");
+        menu();    
     }
-    else{
-            printf("Em programacao...");
-            system("pause");
-            menu();    
-}}
+}
 
 
 void cabecalho(char Titulo[50]) {
