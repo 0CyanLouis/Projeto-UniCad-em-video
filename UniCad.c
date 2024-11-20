@@ -43,7 +43,7 @@ void delete() {
 
     printf("1 - Remover todos os registros \n2 - Remover apenas um registro\n");
     scanf("%s", target);
-    if(target != NULL){
+    if(target == 1){
             while (fgets(line, sizeof(line), file))
             if (!strstr(line, target))
             fputs(line, temp);
