@@ -51,7 +51,7 @@ void delete() {
             fclose(file);
             fclose(temp);
             remove("aluno.csv");
-            rename("aluno.csv", "aluno.csv");
+            rename("temp.csv", "aluno.csv");
             printf("Todos os registros removidos!\n");
     }
     else{
