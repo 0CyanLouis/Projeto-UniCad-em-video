@@ -62,7 +62,7 @@ void exibir_cadastros()
     printf("<body>\n");
     printf("<h2 style='text-align: center;'>Lista de Cadastros</h2>\n");
     printf("<table>\n");
-    printf("<tr><th>Nome</th><th>CPF</th><th>Email</th><th>Matrícula</th></tr>\n");
+    printf("<tr><th>Nome</th><th>CPF</th><th>Email</th><th>Matricula</th></tr>\n");
 
     // Iterando sobre os resultados e exibindo cada registro
     while ((row = mysql_fetch_row(res)) != NULL)
