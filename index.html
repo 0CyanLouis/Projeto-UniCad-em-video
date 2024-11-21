@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="pt-br" data-bss-forced-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Formulário de Cadastro</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/css/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/css/css/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/css/css/css/busca.css">
+</head>
+
+<body>
+    <div class="container" style="margin-right:38px;margin-left:117px;">
+        <div class="login-dark">
+            <form action="/cgi-bin/cadastro_cgi.exe" method="POST" style="text-align:center;">
+                <h2 class="text-center">Formulário de Cadastro</h2>
+                <div class="form-group mb-3"><input class="form-control form-control form-control" type="text" name="nome" placeholder="Nome" required=""></div>
+                <div class="form-group mb-3"><input class="form-control form-control form-control" type="text" name="cpf" placeholder="CPF" required=""></div>
+                <div class="form-group mb-3"><input class="form-control form-control form-control" type="email" name="email" placeholder="Email" required=""></div>
+                <div class="form-group mb-3"><input class="form-control form-control form-control" type="text" name="matricula" placeholder="Matrícula" required=""></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:214.3906px;">Enviar</button></div>
+            </form>
+        </div>
+        <div class="login-dark" style="position: relative;">
+            <form action="/cgi-bin/busca_cgi.exe" method="POST" style="text-align:center;">
+                <h2 class="text-center">Exibir Banco de Dados</h2><button class="btn btn-primary btn-block" type="submit" style="margin-top:80px;margin-bottom:80px;width:214.3906px;">Exibir</button>
+            </form>
+        </div>
+        <div class="login-dark" style="position: relative;">
+            <form action="/cgi-bin/delete_cgi.exe" method="POST" style="text-align:center;">
+                <h2 class="text-center">Deletar por CPF</h2>
+                <div class="form-group mb-3"><input class="form-control form-control form-control" type="text" name="cpf" placeholder="CPF" required=""></div><button class="btn btn-danger btn-block" type="submit" style="width:214.3906px;">Deletar</button>
+            </form>
+        </div>
+        <div class="login-dark"></div>
+        <div class="login-dark"></div>
+        <div id="resultado" class="mt-4"></div>
+        <div id="listagemCadastros" class="mt-4"></div>
+    </div><script>
+        // Função para enviar o formulário via AJAX
+        document.getElementById('formCadastro').addEventListener('submit', function (e) {
+            e.preventDefault();  // Evita o redirecionamento padrão do formulário
+
+            var formData = new FormData(this);  // Coleta os dados do formulário
+
+            // Envia os dados via POST usando AJAX
+            fetch('/cgi-bin/cadastro_cgi.exe', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Cadastro realizado com sucesso!');
+                        carregarCadastros();  // Atualiza a listagem de cadastros
+                    } else {
+                        alert('Ocorreu um erro ao realizar o cadastro.');
+                    }
+                })
+                .catch(error => {
+                    alert('Erro na conexão com o servidor.');
+                });
+        });
+
+        // Função para carregar e exibir a listagem dos cadastros
+        function carregarCadastros() {
+            fetch('/dados.txt')  // Lê o conteúdo de dados.txt
+                .then(response => response.text())
+                .then(data => {
+                    // Exibe os cadastros no elemento de listagem
+                    document.getElementById('listagemCadastros').innerHTML = '<h3>Cadastros:</h3><pre>' + data + '</pre>';
+                })
+                .catch(error => {
+                    document.getElementById('listagemCadastros').innerHTML = '<p>Não foi possível carregar a listagem de cadastros.</p>';
+                });
+        }
+
+        // Carregar cadastros quando a página é aberta
+        document.addEventListener('DOMContentLoaded', function () {
+            carregarCadastros();
+        });
+    </script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/bootstrap.min.js"></script>
+</body>
+
+</html>
